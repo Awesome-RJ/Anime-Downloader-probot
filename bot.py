@@ -1,9 +1,12 @@
+import os
+import config
+import logging
+
 from pyrogram import *
 from pyrogram.handlers import *
 from Anime_Downloader_Probot.anime_search import anime_search
 from Anime_Downloader_Probot.start_message import start_message
 from Anime_Downloader_Probot.dev_info import dev_info
-import logging
 from Anime_Downloader_Probot.genres import genres
 from Anime_Downloader_Probot.genre_results import genre_results
 from Anime_Downloader_Probot.get_anime_details import anime_details
@@ -15,14 +18,13 @@ from Anime_Downloader_Probot.airing import airing_eps
 from Anime_Downloader_Probot.recently import recently_eps
 from Anime_Downloader_Probot.inline_search_results import anime_inline_details
 from Anime_Downloader_Probot.get_ep_numbers import get_ep
-import config
 
-import logging
+
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
-import os
+
 
 if bool(os.environ.get("WEBHOOK", False)):
     from sample_config import Config
