@@ -1,9 +1,10 @@
+import requests
+import sys
+
 from pyrogram import *
 from pyrogram.types import *
-import requests
-from bs4 import BeautifulSoup
 from pyrogram.errors.exceptions.bad_request_400 import ButtonDataInvalid
-import sys
+from bs4 import BeautifulSoup
 
 # Get Inline Keyboard List of Anime with the returned Genre Callback_Data
 
