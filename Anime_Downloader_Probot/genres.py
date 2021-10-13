@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 def genres(client, message):
     gen_keyb = []
-    animelink = 'https://gogoanime.pe/'
+    animelink = 'https://gogoanime2.org/'
     response = requests.get(animelink)
     plainText = response.text
     soup = BeautifulSoup(plainText, "lxml")

@@ -16,7 +16,7 @@ def get_ep(client, callback_query):
     query.answer("Fetching Episodes...")
     data_spl = data.split("_")
     # print(data_spl)
-    animelink = f'https://gogoanime.pe/category/{data_spl[1]}'
+    animelink = f'https://gogoanime2.org/category/{data_spl[1]}'
     response = requests.get(animelink)
     plainText = response.text
     soup = BeautifulSoup(plainText, "lxml")

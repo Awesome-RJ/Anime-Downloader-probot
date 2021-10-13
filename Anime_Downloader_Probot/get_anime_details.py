@@ -12,7 +12,7 @@ def anime_details(client, callback_query):
     dt1 = dt.split("_")
     data = dt1[1]
     query.answer("⏳ Fetching Anime Details...")
-    animelink = 'https://gogoanime.pe/category/{}'.format(data)
+    animelink = 'https://gogoanime2.org/category/{}'.format(data)
     response = requests.get(animelink)
     plainText = response.text
     soup = BeautifulSoup(plainText, "lxml")

@@ -47,7 +47,7 @@ def anime_search(client, message):
 For ex: /search one piece
 """, parse_mode="markdown")
     else:
-        url = f"https://gogoanime.pe/search.html?keyword={query}"
+        url = f"https://gogoanime2.org/search.html?keyword={query}"
         session = HTMLSession()
         response = session.get(url)
         response_html = response.text

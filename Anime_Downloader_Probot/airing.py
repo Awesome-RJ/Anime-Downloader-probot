@@ -9,7 +9,7 @@ import sys
 # Returns an "Inline Keyboard List" of Currently airing Anime
 
 def airing_eps(client, message):
-    url = f"https://gogoanime.pe/"
+    url = f"https://gogoanime2.org/"
     session = HTMLSession()
     response = session.get(url)
     response_html = response.text
