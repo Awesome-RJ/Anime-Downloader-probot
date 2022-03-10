@@ -30,9 +30,7 @@ def anime_details(client, callback_query):
     type_of_show = lis[0].a['title']
     ai = lis[2].find_all('a')  # .find_all('title')
     # get list of genres by using genres variable
-    genres = []
-    for link in ai:
-        genres.append(link.get('title'))
+    genres = [link.get('title') for link in ai]
     # get released year
     year = lis[3].get_text()
     # status completed or airing,,,

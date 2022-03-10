@@ -26,9 +26,7 @@ def genre_results(client, callback_query):
             urll = anime.a["href"]
             r = urll.split('/')
             res = sys.getsizeof(r[2])
-            if int(res) > 64:
-                pass
-            else:
+            if int(res) <= 64:
                 keybrd_genre_butt.append([(InlineKeyboardButton(tit, callback_data=f"dt_{r[2]}"))])
         # n = 3
         # keybrd_genre_butt = [keybrd_genre_butts[i:i + n] for i in range(0, len(keybrd_genre_butts), n)]

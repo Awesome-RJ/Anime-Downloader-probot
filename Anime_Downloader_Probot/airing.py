@@ -9,7 +9,7 @@ import sys
 # Returns an "Inline Keyboard List" of Currently airing Anime
 
 def airing_eps(client, message):
-    url = f"https://gogoanime2.org/"
+    url = "https://gogoanime2.org/"
     session = HTMLSession()
     response = session.get(url)
     response_html = response.text
@@ -22,9 +22,7 @@ def airing_eps(client, message):
         link = airing_link.split('/')
         lnk_final = link[2]
         res = len(lnk_final)
-        if int(res) > 64:
-           pass
-        else:
+        if res <= 64:
             air.append([InlineKeyboardButton(f"{name}", callback_data=f"dt_{lnk_final}")])
     repl = InlineKeyboardMarkup(air)
     message.reply_text("**Currently Airing Anime: **", reply_markup=repl, parse_mode="markdown")

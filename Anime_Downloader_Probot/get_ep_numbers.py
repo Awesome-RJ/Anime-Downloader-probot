@@ -33,14 +33,14 @@ def get_ep(client, callback_query):
         source_url = lnk.find("li").a
         ep_num_tot = source_url.get("ep_end")
         ep_num_tot_range = int(ep_num_tot) + 1
-    listInitial = []
-    for i in range(1, ep_num_tot_range):
-        listInitial.append(i)
+    listInitial = list(range(1, ep_num_tot_range))
     n = 40
     listOrganisedInitial = [listInitial[i:i + n] for i in range(0, len(listInitial), n)]
-    keyb_eps = []
-    for i in listOrganisedInitial[int(ep_index_num)]:
-        keyb_eps.append((InlineKeyboardButton(f'{i}', callback_data=f"eps_{i}_{animeid}")))
+    keyb_eps = [
+        InlineKeyboardButton(f'{i}', callback_data=f"eps_{i}_{animeid}")
+        for i in listOrganisedInitial[int(ep_index_num)]
+    ]
+
     m=5
     keybrd_inline_butt = [keyb_eps[i:i + m] for i in range(0, len(keyb_eps), m)]
     keybrd_inline_butt.append([InlineKeyboardButton("⮜ Back", callback_data=f"dl_{animeid}")])

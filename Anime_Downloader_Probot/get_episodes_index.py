@@ -27,16 +27,17 @@ def get_epIndex(client, callback_query):
         ep_num_tot = list_more_anime[0].get("ep_end")
         ep_num_tot_range = int(ep_num_tot) + 1
         if int(ep_num_tot) > 120:
-            listInitial = []
-            for i in range(1, ep_num_tot_range):
-                listInitial.append(i)
+            listInitial = list(range(1, ep_num_tot_range))
             n = 40
             listOrganisedInitial = [listInitial[i:i + n] for i in range(0, len(listInitial), n)]
-            listIndex = []
-            for item in listOrganisedInitial:
-                listIndex.append(
-                    (InlineKeyboardButton(f"{item[0]}-{item.pop()}",
-                                          callback_data=f"eplink_{data_spl[1]}_{listOrganisedInitial.index(item)}")))
+            listIndex = [
+                InlineKeyboardButton(
+                    f"{item[0]}-{item.pop()}",
+                    callback_data=f"eplink_{data_spl[1]}_{listOrganisedInitial.index(item)}",
+                )
+                for item in listOrganisedInitial
+            ]
+
             o = 3
             listIndexFinal = [listIndex[i:i + o] for i in range(0, len(listIndex), o)]
             listIndexFinal.append([InlineKeyboardButton("⮜ Back", callback_data=f"dt_{data_spl[1]}")])
@@ -50,9 +51,13 @@ Select the Episode you want :""", reply_markup=repl, parse_mode="markdown")
             ep_num_tot = source_url.get("ep_end")
             ep_num_tot_range = int(ep_num_tot) + 1
             n = 5
-            keyb_eps = []
-            for i in range(1, ep_num_tot_range):
-                keyb_eps.append((InlineKeyboardButton(f'{i}', callback_data=f"eps_{i}_{data_spl[1]}")))
+            keyb_eps = [
+                InlineKeyboardButton(
+                    f'{i}', callback_data=f"eps_{i}_{data_spl[1]}"
+                )
+                for i in range(1, ep_num_tot_range)
+            ]
+
             keybrd_inline_butt = [keyb_eps[i:i + n] for i in range(0, len(keyb_eps), n)]
             reply_markups = InlineKeyboardMarkup(keybrd_inline_butt)
             query.edit_message_text(text=f"""You selected **{tit_url}**,
@@ -64,8 +69,13 @@ Select the Episode you want :""", reply_markup=reply_markups, parse_mode="markdo
         ep_num_tot_range = int(ep_num_tot) + 1
         n = 5
         keyb_eps = []
-        for i in range(1, ep_num_tot_range):
-            keyb_eps.append((InlineKeyboardButton(f'{i}', callback_data=f"eps_{i}_{data_spl[1]}")))
+        keyb_eps.extend(
+            InlineKeyboardButton(
+                f'{i}', callback_data=f"eps_{i}_{data_spl[1]}"
+            )
+            for i in range(1, ep_num_tot_range)
+        )
+
         keybrd_inline_butt = [keyb_eps[i:i + n] for i in range(0, len(keyb_eps), n)]
         reply_markups = InlineKeyboardMarkup(keybrd_inline_butt)
         query.edit_message_text(text=f"""You selected **{tit_url}**,

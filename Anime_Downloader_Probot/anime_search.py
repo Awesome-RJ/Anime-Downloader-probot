@@ -41,11 +41,10 @@ def anime_search(client, message):
         # If no query string is mentioned
         message.reply_sticker(random.choice(STICKERS))
         message.reply_text(
-        text = f"""**Your Query should be in This format:** 
+            text="""**Your Query should be in This format:** \x1f\x1f`/search <space> Name of the Anime you want to Search.`\x1fFor ex: /search one piece\x1f""",
+            parse_mode="markdown",
+        )
 
-`/search <space> Name of the Anime you want to Search.`
-For ex: /search one piece
-""", parse_mode="markdown")
     else:
         url = f"https://gogoanime2.org/search.html?keyword={query}"
         session = HTMLSession()
@@ -61,7 +60,7 @@ For ex: /search one piece
             r = urll.split('/')
             # aAnimes.append({"title" : anime.a["title"] , "link" : "https://www2.gogoanime.pe{}".format(anime.a["href"])})
             keyb.append([InlineKeyboardButton("{}".format(tit), callback_data="dt_{}".format(r[2]))])
-        if keyb == []:
+        if not keyb:
             # If returned list is empty, Send the following message.
             message.reply_text("❌ No results found, Check your Spelling and Search Again...")
         else:

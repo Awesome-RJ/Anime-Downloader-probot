@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 def get_ep_link(client, callback_query):
     query = callback_query
     data = query.data
-    query.answer(f"🕰️ Please Wait Till I Fetch Links...")
+    query.answer("🕰️ Please Wait Till I Fetch Links...")
     data_spl_ep = data.split("_")
     ep_num_link_get = int(data_spl_ep[1])
     data_spl_ep.remove(data_spl_ep[0])
@@ -101,7 +101,7 @@ def get_ep_link(client, callback_query):
         downlink7 = dow_url7.get('href')
     except:
         pass
-    
+
     try:
         str1 = dow_url1.string
         str_spl1 = str1.split()
@@ -110,7 +110,7 @@ def get_ep_link(client, callback_query):
         quality_name1 = str_original_1.join(str_spl1)
     except:
         pass
-    
+
     try:
         str2 = dow_url2.string
         str_spl2 = str2.split()
@@ -119,7 +119,7 @@ def get_ep_link(client, callback_query):
         quality_name2 = str_original_2.join(str_spl2)
     except:
         pass
-    
+
     try:
         str3 = dow_url3.string
         str_spl3 = str3.split()
@@ -128,7 +128,7 @@ def get_ep_link(client, callback_query):
         quality_name3 = str_original_3.join(str_spl3)
     except:
         pass
-    
+
     try:
         str4 = dow_url4.string
         str_spl4 = str4.split()
@@ -146,7 +146,7 @@ def get_ep_link(client, callback_query):
         quality_name5 = str_original_5.join(str_spl5)
     except:
         pass
-    
+
     try:
         str6 = dow_url6.string
         str_spl6 = str6.split()
@@ -164,7 +164,7 @@ def get_ep_link(client, callback_query):
         quality_name7 = str_original_7.join(str_spl7)
     except:
         pass
-    
+
     res_list = []
     try:
         res_list.append({'num':f'{ep_num_link_get}','qual':f'{quality_name1}','lnk':f'{downlink1}'})
@@ -194,17 +194,17 @@ def get_ep_link(client, callback_query):
         res_list.append({'num':f'{ep_num_link_get}','qual':f'{quality_name7}','lnk':f'{downlink7}'})
     except:
         pass
-    
-    
+
+
+    n = 3
+    key = []
+    for links in res_list:
+        ep_number = links.get('num')
+        quality = links.get('qual')
+        download_links = links.get('lnk')
+        key.append((InlineKeyboardButton(f"Ep{ep_number} {quality}", url=f"{download_links}")))
+    keys = [key[i:i + n] for i in range(0, len(key), n)]
     if ep_num_link_get == last_ep:
-        key = []
-        for links in res_list:
-            ep_number = links.get('num')
-            quality = links.get('qual')
-            download_links = links.get('lnk')
-            key.append((InlineKeyboardButton(f"Ep{ep_number} {quality}", url=f"{download_links}")))
-        n = 3
-        keys = [key[i:i + n] for i in range(0, len(key), n)]
         keys.append([(InlineKeyboardButton("⮜ Prev Episode", callback_data=f"eps_{ep_num_link_get - 1}_{str_qry_final}")),
                     (InlineKeyboardButton("💽 Back to List", callback_data=f"dl_{str_qry_final}"))])
         reply_markup = InlineKeyboardMarkup(keys)
@@ -216,14 +216,6 @@ Share Our Bot If You Like Our Service 💜.
 
 **This the Last Episode of the Series 🥳🥳🥳**""", reply_markup=reply_markup, parse_mode="markdown")
     elif ep_num_link_get == 1:
-        key = []
-        for links in res_list:
-            ep_number = links.get('num')
-            quality = links.get('qual')
-            download_links = links.get('lnk')
-            key.append((InlineKeyboardButton(f"Ep{ep_number} {quality}", url=f"{download_links}")))
-        n = 3
-        keys = [key[i:i + n] for i in range(0, len(key), n)]
         keys.append([(InlineKeyboardButton("💽 Back to List", callback_data=f"dl_{str_qry_final}")),
              (InlineKeyboardButton("Next Episode ⮞", callback_data=f"eps_{ep_num_link_get + 1}_{str_qry_final}"))])
         reply_markup = InlineKeyboardMarkup(keys)
@@ -233,14 +225,6 @@ Share Our Bot If You Like Our Service 💜.
 
 Share Our Bot If You Like Our Service 💜.""", reply_markup=reply_markup, parse_mode="markdown")
     else:
-        key = []
-        for links in res_list:
-            ep_number = links.get('num')
-            quality = links.get('qual')
-            download_links = links.get('lnk')
-            key.append((InlineKeyboardButton(f"Ep{ep_number} {quality}", url=f"{download_links}")))
-        n = 3
-        keys = [key[i:i + n] for i in range(0, len(key), n)]
         keys.append([(InlineKeyboardButton("⮜ Prev Episode", callback_data=f"eps_{ep_num_link_get - 1}_{str_qry_final}")),
              (InlineKeyboardButton("💽 Back to List", callback_data=f"dl_{str_qry_final}")),
              (InlineKeyboardButton("Next Episode ⮞", callback_data=f"eps_{ep_num_link_get + 1}_{str_qry_final}"))])
